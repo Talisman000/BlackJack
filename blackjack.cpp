@@ -29,6 +29,7 @@ int main()
 	}
 	while (true)
 	{
+		//テキスト表示
 		std::cout << "-----------------------------------------" << std::endl;
 		std::cout << "Dealer:" << suitName[dealer.GetCard(0).GetSuit()] << " " << dealer.GetCard(0).GetNumber() << std::endl;
 		std::cout << "Player:";
@@ -37,11 +38,13 @@ int main()
 			std::cout << suitName[player.GetCard(i).GetSuit()] << " " << player.GetCard(i).GetNumber() << ", ";
 		}
 		std::cout << std::endl;
+		//カードを引く
 		std::cout << "Pull a card? (y/n):";
 		char c;
 		std::cin >> c;
 		if (c == 'y') {
 			Pull(player, CardPool, true);
+			//21を超えたら問答無用で退場
 			if (player.GetPoints() > 21) {
 				Result(player, dealer);
 				break;
@@ -62,6 +65,7 @@ void Pull(Player& player, std::vector<Card>& pool, bool isPlayer)
 {
 	Card card = player.PullCard(pool);
 	int cardNumber = card.GetNumber();
+	//エース！！！は1か11か選べる
 	if (cardNumber == 1)
 	{
 		if (isPlayer)
@@ -84,6 +88,7 @@ void Pull(Player& player, std::vector<Card>& pool, bool isPlayer)
 				}
 			}
 		}
+		//ディーラーの処理:ポイントの状況で1か11かを選ぶ
 		else
 		{
 			if (player.GetPoints() <= 10)
