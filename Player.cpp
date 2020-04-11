@@ -4,7 +4,7 @@ Player::Player(){
 }
 Card Player::PullCard(std::vector<Card> &pool)
 {
-    int pos = rand() % pool.size() + 1;
+    int pos = rand() % pool.size();
     Card card = pool[pos];
     pool.erase(pool.begin() + pos);
     cards.emplace_back(card);
